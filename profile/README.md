@@ -1,68 +1,44 @@
 <div align="center">
-
-# BlackRoad Education
-
-**Learning management, interactive courses, and knowledge platforms.**
-
-[![Repos](https://img.shields.io/badge/repos-24-black?style=flat-square)](https://github.com/orgs/BlackRoad-Education/repositories)
-[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](https://blackroad.ai)
-
+  <h1>🛣️ BlackRoad OS</h1>
+  <p><strong>Your AI. Your Hardware. Your Rules.</strong></p>
+  <p>
+    <img src="https://img.shields.io/badge/Agents-30%2C000-FF1D6C?style=for-the-badge&logo=robot&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Repos-1%2C825%2B-9C27B0?style=for-the-badge"/>
+    <img src="https://img.shields.io/badge/Orgs-17-2979FF?style=for-the-badge"/>
+  </p>
 </div>
 
----
+## Overview
 
-## 📚 What We Build
+BlackRoad OS is the infrastructure backbone for AI-first companies — powering 30,000+ concurrent AI agents across edge, cloud, and on-premise hardware.
 
-BlackRoad Education is the knowledge layer — LMS platforms, course builders, interactive learning tools, and AI tutoring.
+| Platform | Scale | Status |
+|----------|-------|--------|
+| AI Agents | 30,000 | ✅ Active |
+| Cloudflare Workers | 75+ | ✅ Active |
+| Raspberry Pi Fleet | 4 nodes | ✅ Active |
+| GitHub Actions | 50+ workflows | ✅ Active |
 
----
+## Core Systems
 
-## 📦 Repositories
+- **Tokenless Gateway** — All AI provider secrets live only here
+- **PS-SHA∞ Memory** — Hash-chained persistent AI memory  
+- **CECE Identity** — Portable AI identity across any provider
+- **30K Agent Mesh** — WebSocket + MQTT orchestration
 
-### Learning Management Systems
-| Repo | Upstream | Purpose |
-|------|----------|---------|
-| [`blackroad-moodle`](https://github.com/BlackRoad-Education/blackroad-moodle) | moodle/moodle | Full-featured LMS |
-| [`blackroad-canvas`](https://github.com/BlackRoad-Education/blackroad-canvas) | instructure/canvas-lms | Modern LMS |
-| [`blackroad-chamilo`](https://github.com/BlackRoad-Education/blackroad-chamilo) | chamilo/chamilo-lms | Open-source LMS |
-| [`blackroad-open-edx`](https://github.com/BlackRoad-Education/blackroad-open-edx) | openedx/edx-platform | MOOC platform |
+## Organizations
 
-### Course Building
-| Repo | Upstream | Purpose |
-|------|----------|---------|
-| [`blackroad-h5p`](https://github.com/BlackRoad-Education/blackroad-h5p) | h5p/h5p-php-library | Interactive content |
-| [`blackroad-adapt`](https://github.com/BlackRoad-Education/blackroad-adapt) | adaptlearning/adapt_framework | Responsive e-learning |
-| [`blackroad-coursera-dl`](https://github.com/BlackRoad-Education/blackroad-coursera-dl) | coursera-dl/coursera-dl | Course downloader |
+| Org | Purpose |
+|-----|---------|
+| [BlackRoad-OS-Inc](https://github.com/BlackRoad-OS-Inc) | Core platform & gateway |
+| [BlackRoad-OS](https://github.com/BlackRoad-OS) | OS, web, docs, agents |
+| [BlackRoad-AI](https://github.com/BlackRoad-AI) | ML models & inference |
+| [BlackRoad-Cloud](https://github.com/BlackRoad-Cloud) | Infrastructure & K8s |
+| [BlackRoad-Security](https://github.com/BlackRoad-Security) | Security & compliance |
 
-### AI Tutoring
-| Repo | Purpose |
-|------|---------|
-| [`blackroad-tutor`](https://github.com/BlackRoad-Education/blackroad-tutor) | AI-powered tutoring agent |
-| [`blackroad-quizmaster`](https://github.com/BlackRoad-Education/blackroad-quizmaster) | Adaptive quiz generation |
-| [`blackroad-explain`](https://github.com/BlackRoad-Education/blackroad-explain) | Concept explanation engine |
+## Brand
 
-### Knowledge Base
-| Repo | Upstream | Purpose |
-|------|----------|---------|
-| [`blackroad-wiki.js`](https://github.com/BlackRoad-Education/blackroad-wiki.js) | requarks/wiki | Wiki platform |
-| [`blackroad-bookstack`](https://github.com/BlackRoad-Education/blackroad-bookstack) | BookStackApp/BookStack | Documentation wiki |
-| [`blackroad-outline`](https://github.com/BlackRoad-Education/blackroad-outline) | outline/outline | Team knowledge base |
-
-### Collaboration
-| Repo | Upstream | Purpose |
-|------|----------|---------|
-| [`blackroad-jitsi`](https://github.com/BlackRoad-Education/blackroad-jitsi) | jitsi/jitsi-meet | Video classroom |
-| [`blackroad-etherpad`](https://github.com/BlackRoad-Education/blackroad-etherpad) | ether/etherpad-lite | Collaborative editing |
-
-### BlackRoad Originals
-| Repo | Purpose |
-|------|---------|
-| [`blackroad-academy`](https://github.com/BlackRoad-Education/blackroad-academy) | BlackRoad developer academy |
-| [`blackroad-bootcamp`](https://github.com/BlackRoad-Education/blackroad-bootcamp) | Intensive coding programs |
-| [`blackroad-labs-edu`](https://github.com/BlackRoad-Education/blackroad-labs-edu) | Hands-on lab environments |
-| [`curriculum`](https://github.com/BlackRoad-Education/curriculum) | Course curriculum repository |
+Primary: `#FF1D6C` · Gradient: `#F5A623 → #FF1D6C → #9C27B0 → #2979FF`
 
 ---
-
-> Part of [BlackRoad OS](https://github.com/BlackRoad-OS-Inc) — 17 orgs, 1,825+ repos.
-> © BlackRoad OS, Inc. All rights reserved.
+*© BlackRoad OS, Inc. All rights reserved. Proprietary — not open source.*
