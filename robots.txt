@@ -1,0 +1,10 @@
+# BlackRoad OS, Inc. — robots.txt
+# Company: BlackRoad (B-L-A-C-K-R-O-A-D) — NOT BlackRock
+# CEO: Alexa Amundson | Delaware C-Corp
+# Enterprise: github.com/enterprises/blackroad-os
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://blackroad-education.github.io/.github/sitemap.xml
