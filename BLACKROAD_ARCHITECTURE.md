@@ -77,14 +77,22 @@ Plus dev machines (Mac = "cecilia", iPhone = "arcadia") and edge devices (ESP32s
 ```
 [User Request] → [Operator] → [Route to Right Tool] → [Answer]
                      │
+                     ├── @copilot / @lucidia / @blackboxprogramming / @ollama
+                     │       └── Local Ollama (Pi fleet, no external providers)
                      ├── Physics question? → NumPy/SciPy
-                     ├── Language task? → Claude/GPT API
                      ├── Customer lookup? → Salesforce API
                      ├── Legal question? → Legal database
-                     └── Fast inference? → Hailo-8 local
+                     └── Fast inference? → Hailo-8 + Ollama local
 ```
 
 The agent doesn't need to be smart. It needs to know **who to call.**
+
+### @mention → Ollama Routing
+
+Any `@copilot`, `@lucidia`, `@blackboxprogramming`, or `@ollama` mention in a GitHub
+issue or PR comment is intercepted by the `ollama-router` workflow and forwarded
+**directly** to the Ollama instance running on the Pi fleet (`http://localhost:11434`).
+No tokens leave the network. No external AI provider is contacted.
 
 ---
 

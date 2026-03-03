@@ -1,0 +1,140 @@
+name: 🦙 Ollama Direct Router
+
+# Intercepts @copilot, @lucidia, @blackboxprogramming, and @ollama mentions
+# and routes every request to the local Ollama instance running on the Pi fleet.
+# Zero external AI providers — all inference happens on BlackRoad hardware.
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  route-to-ollama:
+    name: "Route @mention → Local Ollama"
+    runs-on: [self-hosted, blackroad-fleet]
+    # Only run when the comment contains one of the trigger handles
+    if: |
+      contains(github.event.comment.body, '@copilot') ||
+      contains(github.event.comment.body, '@lucidia') ||
+      contains(github.event.comment.body, '@blackboxprogramming') ||
+      contains(github.event.comment.body, '@ollama')
+
+    steps:
+      - name: Extract prompt from comment
+        id: extract
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: |
+          python3 << 'EOF'
+          import re, os
+
+          body = os.environ.get('COMMENT_BODY', '')
+
+          # Strip all trigger @mentions (with optional trailing period) and surrounding whitespace
+          prompt = re.sub(
+              r'@(copilot|lucidia|blackboxprogramming|ollama)\.?\s*',
+              '',
+              body,
+              flags=re.IGNORECASE
+          ).strip()
+
+          # Clamp to 2000 chars — keeps payloads small and responses fast on Pi hardware
+          prompt = prompt[:2000]
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"prompt<<ENDOFPROMPT\n{prompt}\nENDOFPROMPT\n")
+
+          print(f"Extracted prompt ({len(prompt)} chars): {prompt[:120]}...")
+          EOF
+
+      - name: Ensure Ollama is running and pick model
+        id: setup
+        run: |
+          # Start Ollama if it isn't already running
+          if ! curl -sf http://localhost:11434/api/tags > /dev/null 2>&1; then
+            echo "Starting Ollama..."
+            nohup ollama serve > /tmp/ollama.log 2>&1 &
+            # Poll until ready (up to 30 s) instead of a fixed sleep
+            for i in $(seq 1 30); do
+              curl -sf http://localhost:11434/api/tags > /dev/null 2>&1 && break
+              sleep 1
+            done
+          fi
+
+          # Use the first available model; fall back to qwen2.5:3b
+          AVAILABLE=$(ollama list 2>/dev/null | awk 'NR>1 {print $1}' | head -1)
+          MODEL="${AVAILABLE:-qwen2.5:3b}"
+
+          echo "model=$MODEL" >> $GITHUB_OUTPUT
+          echo "✅ Ollama ready — model: $MODEL"
+
+      - name: Query Ollama
+        id: query
+        env:
+          PROMPT: ${{ steps.extract.outputs.prompt }}
+          MODEL: ${{ steps.setup.outputs.model }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, urllib.request
+
+          prompt = os.environ.get('PROMPT', '').strip()
+          model  = os.environ.get('MODEL', 'qwen2.5:3b')
+
+          if not prompt:
+              response = "*(No prompt detected — please type your question after the @mention.)*"
+          else:
+              payload = json.dumps({
+                  "model": model,
+                  "prompt": prompt,
+                  "stream": False
+              }).encode()
+
+              try:
+                  req = urllib.request.Request(
+                      'http://localhost:11434/api/generate',
+                      data=payload,
+                      headers={"Content-Type": "application/json"},
+                      method="POST"
+                  )
+                  with urllib.request.urlopen(req, timeout=120) as resp:
+                      data = json.loads(resp.read())
+                      response = data.get('response', '').strip() or "*(Empty response from model)*"
+              except Exception as e:
+                  response = f"⚠️ Ollama unreachable on this runner: {e}"
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"response<<ENDRESPONSE\n{response}\nENDRESPONSE\n")
+
+          print(f"Response preview: {response[:200]}")
+          PYEOF
+
+      - name: Post Ollama response as comment
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        env:
+          OLLAMA_RESPONSE: ${{ steps.query.outputs.response }}
+          OLLAMA_MODEL: ${{ steps.setup.outputs.model }}
+        with:
+          script: |
+            const response = process.env.OLLAMA_RESPONSE || '*(No response)*';
+            const model    = process.env.OLLAMA_MODEL    || 'ollama';
+
+            const body = [
+              `🦙 **Ollama** (\`${model}\`) — Local inference on BlackRoad hardware`,
+              '',
+              response,
+              '',
+              '---',
+              '*Routed directly to local Ollama. No external AI providers used.*'
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner:        context.repo.owner,
+              repo:         context.repo.repo,
+              // issue_comment events expose the issue/PR number on context.payload.issue
+              issue_number: context.payload.issue?.number ?? context.payload.pull_request?.number,
+              body:         body
+            });
