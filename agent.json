@@ -6,5 +6,12 @@
   "runners": "blackroad-fleet",
   "cost": "$0",
   "gateway": "http://octavia.local:8787",
-  "updated": "2026-02-23T22:49:06Z"
+  "ollama": {
+    "endpoint": "http://localhost:11434",
+    "model": "qwen2.5:3b",
+    "handles": ["@copilot", "@lucidia", "@blackboxprogramming", "@ollama"],
+    "provider": "local",
+    "external_providers": false
+  },
+  "updated": "2026-03-03T04:43:22Z"
 }
