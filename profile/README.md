@@ -1,33 +1,25 @@
-<div align="center">
-
 # BlackRoad Education
 
-**Learning platform — courses, tutorials, code challenges, and quizzes.**
-
-[![Website](https://img.shields.io/badge/blackroad--education.github.io-000?style=flat-square&logo=github)](https://blackroad-education.github.io)
-
-</div>
+**A division of [BlackRoad OS, Inc.](https://github.com/BlackRoad-OS-Inc) — Proprietary Software**
 
 ---
 
-## Repositories
+## About
 
-| Repository | Description |
-|---|---|
-| [roadwork-platform](https://github.com/BlackRoad-Education/roadwork-platform) | 🎓 RoadWork - Affordable AI tutoring platform. Replaces Chegg/CourseHero with /month unlimited access. |
-| [courses](https://github.com/BlackRoad-Education/courses) | Comprehensive courses and learning paths |
-| [tutorials](https://github.com/BlackRoad-Education/tutorials) | Step-by-step tutorials for BlackRoad ecosystem |
+BlackRoad Education is the learning and education division of BlackRoad OS. BlackRoad Education builds tutoring platforms, course systems, quizzes, and code challenges. Affordable AI-powered education that replaces expensive subscription services.
 
-<details>
-<summary>Archived</summary>
+All repositories in this organization are proprietary to BlackRoad OS, Inc. Source code is publicly visible for transparency. Commercial use, forking, and redistribution are prohibited.
 
-| Repository | Description |
-|---|---|
-| [blackroad-quiz-platform](https://github.com/BlackRoad-Education/blackroad-quiz-platform) | Adaptive quiz platform with spaced repetition |
-| [blackroad-code-challenge](https://github.com/BlackRoad-Education/blackroad-code-challenge) | Coding challenge platform with test runner |
+## Parent Organization
 
-</details>
+This division operates under [BlackRoad-OS-Inc](https://github.com/BlackRoad-OS-Inc), the corporate root of the BlackRoad ecosystem. See the parent org for the full technology stack, product catalog, and organizational structure.
+
+## License
+
+Proprietary — BlackRoad OS, Inc. See individual repositories for license terms.
 
 ---
 
-<sub>BlackRoad OS, Inc. — [blackroad.io](https://blackroad.io)</sub>
+**BlackRoad OS — Pave Tomorrow.**
+
+*Copyright 2024-2026 BlackRoad OS, Inc. All Rights Reserved.*
